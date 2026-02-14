@@ -14,6 +14,10 @@ export default {
       path: "/exports",
     },
     {
+      name: "形势分析",
+      path: "/analysis",
+    },
+    {
       name: "数据来源",
       path: "/sources",
     },
