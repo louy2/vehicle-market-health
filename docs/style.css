@@ -1,0 +1,99 @@
+:root {
+  --accent-color: #c41e3a;
+  --accent-light: #e8384f;
+}
+
+.hero {
+  margin: 2rem 0;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 640px;
+}
+
+.hero h2 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--theme-foreground-muted);
+  max-width: 640px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.kpi-card {
+  padding: 1.25rem;
+  border-radius: 8px;
+  background: var(--theme-background-alt);
+  border: 1px solid var(--theme-foreground-faintest);
+}
+
+.kpi-card .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--theme-foreground-muted);
+  margin-bottom: 0.25rem;
+}
+
+.kpi-card .value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.kpi-card .delta {
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.kpi-card .delta.positive {
+  color: #22a553;
+}
+
+.kpi-card .delta.negative {
+  color: #e8384f;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.card-section {
+  padding: 1.25rem;
+  border-radius: 8px;
+  background: var(--theme-background-alt);
+  border: 1px solid var(--theme-foreground-faintest);
+}
+
+.card-section h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.note {
+  font-size: 0.8rem;
+  color: var(--theme-foreground-muted);
+  margin-top: 0.5rem;
+}
+
+.source-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: var(--theme-foreground-muted);
+  border: 1px solid var(--theme-foreground-faintest);
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  margin-top: 0.5rem;
+}

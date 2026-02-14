@@ -1,0 +1,25 @@
+year,month,sales,source_note
+2024,1,32.4,CAAM confirmed
+2024,2,25.1,CAAM confirmed
+2024,3,41.5,Estimated from H1 cumulative
+2024,4,37.0,Estimated from H1 cumulative
+2024,5,35.5,Estimated from H1 cumulative
+2024,6,33.7,CAAM confirmed
+2024,7,28.5,Estimated from seasonal pattern
+2024,8,27.0,Estimated from seasonal pattern
+2024,9,30.5,Estimated from seasonal pattern
+2024,10,27.5,Estimated from cumulative
+2024,11,31.5,CAAM confirmed
+2024,12,36.9,CAAM confirmed
+2025,1,29.0,CAAM confirmed
+2025,2,31.4,Derived from Q1 cumulative
+2025,3,44.7,CAAM confirmed
+2025,4,36.7,CAAM confirmed
+2025,5,33.5,CAAM confirmed
+2025,6,36.9,CAAM confirmed
+2025,7,36.5,Estimated from annual total
+2025,8,35.0,Estimated from annual total
+2025,9,36.0,Estimated from annual total
+2025,10,34.0,Estimated from annual total
+2025,11,33.4,Estimated from annual total
+2025,12,42.5,CAAM confirmed
