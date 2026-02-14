@@ -1,11 +1,13 @@
 year,segment,nev_sales_k,penetration_pct
-2024,Heavy Truck,82.0,9.1
+2024,Heavy Truck,82.7,9.1
 2024,Medium Truck,15.0,8.5
 2024,Light Truck,88.0,12.0
+2024,Van / Urban Logistics,245.0,56.9
 2024,Bus,50.8,32.2
 2024,City Bus,45.0,98.0
-2025,Heavy Truck,190.0,25.0
+2025,Heavy Truck,231.1,29.0
 2025,Medium Truck,30.0,16.0
 2025,Light Truck,180.0,28.0
+2025,Van / Urban Logistics,280.0,60.0
 2025,Bus,55.0,35.0
 2025,City Bus,48.0,99.0

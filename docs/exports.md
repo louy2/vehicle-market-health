@@ -9,7 +9,7 @@ const exports_data = FileAttachment("data/exports.csv").csv({typed: true});
 const mfShare = FileAttachment("data/manufacturer-share.csv").csv({typed: true});
 ```
 
-中国商用车出口近年呈爆发式增长，2025年首次突破100万辆，从2019年的23.4万辆增长4.5倍。与此同时，国内市场竞争格局正在因新能源化而加速重塑。
+中国商用车出口近年呈爆发式增长，2025年首次突破100万辆（106万辆），从2019年的28.5万辆增长3.7倍。与此同时，国内市场竞争格局正在因新能源化而加速重塑。
 
 ---
 
