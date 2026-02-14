@@ -1,0 +1,11 @@
+destination,china_reported_exports_m_usd,partner_reported_imports_m_usd,discrepancy_pct,truck_units_2024,truck_share_pct,risk_flag,note
+Russia,2600,2200,18.2,76200,20.0,HIGH,"Direct exports plunged 83-87% in 2025; 274 showrooms closed Q1 2025"
+Kyrgyzstan,22000,8000,175.0,,3.5,EXTREME,"China exports exceed Kyrgyz GDP; documented transshipment to Russia"
+Kazakhstan,27950,15150,84.5,,4.0,EXTREME,"$12.8B gap; Horgos port processed 421k vehicles in 2024"
+Mexico,13540,13200,2.6,40000,12.0,LOW,"Some re-export hub effects to Central/South America"
+Vietnam,1800,1650,9.1,14674,6.5,LOW,"Fast-growing +81% YoY; CKD components may be underreported"
+Saudi Arabia,1200,1100,9.1,14622,5.0,LOW,"Legitimate Vision 2030 demand; +77% YoY growth"
+Chile,600,590,1.7,11241,3.9,LOW,"FTA ensures good data quality; 100% import-dependent"
+Uzbekistan,14200,12000,18.3,16162,2.9,MODERATE,"226% truck growth; some informal economy leakage"
+Tajikistan,3700,2300,60.9,,1.5,HIGH,"$1.4B gap; documented transshipment corridor"
+Algeria,500,480,4.2,4500,2.0,LOW,"+2361% growth from low base"

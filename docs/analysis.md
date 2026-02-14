@@ -14,6 +14,7 @@ const monthlySales = FileAttachment("data/monthly-sales.csv").csv({typed: true})
 const fiscalIndicators = FileAttachment("data/fiscal-indicators.csv").csv({typed: true});
 const lgfvDebt = FileAttachment("data/lgfv-debt.csv").csv({typed: true});
 const hdtDemand = FileAttachment("data/hdt-demand-structure.csv").csv({typed: true});
+const exportMirror = FileAttachment("data/export-mirror.csv").csv({typed: true});
 ```
 
 <div class="hero">
@@ -251,6 +252,103 @@ Plot.plot({
 - **目的地国的本地化要求**——部分国家已开始要求CKD（散件组装）模式而非整车出口，挤压出口利润
 
 总体而言，出口增长的大趋势未变，但年增17%的高增速难以长期持续。预计未来3–5年出口增速将逐步回落至个位数。
+
+### 4.1 镜像统计审计：出口数据经得起检验吗？
+
+出口数据有一种独特的验证方式：**与目的地国的进口数据交叉对比**（即"镜像统计"）。如果中国说向某国出口了X辆卡车，那么该国的进口数据应该显示大致相同的数字。正常的CIF/FOB价差和时间错位会导致10–15%的偏差，但超过30%就需要警惕了。
+
+我们对中国商用车前十大出口目的地进行了镜像统计审计：
+
+```js
+Plot.plot({
+  width,
+  height: 360,
+  marginLeft: 90,
+  marginRight: 20,
+  x: {label: "镜像统计偏差（%）", grid: true, domain: [0, 200]},
+  y: {label: null},
+  color: {
+    legend: true,
+    domain: ["LOW", "MODERATE", "HIGH", "EXTREME"],
+    range: ["#22a553", "#f28e2c", "#e15759", "#8b0000"],
+    label: "风险等级"
+  },
+  marks: [
+    Plot.barX(exportMirror.filter(d => d.discrepancy_pct > 0).sort((a, b) => b.discrepancy_pct - a.discrepancy_pct), {
+      y: "destination", x: "discrepancy_pct",
+      fill: "risk_flag",
+      sort: {y: null},
+      tip: true,
+      title: d => `${d.destination}\n偏差: ${d.discrepancy_pct}%\n中国报告: $${(d.china_reported_exports_m_usd / 1000).toFixed(1)}B\n对方报告: $${(d.partner_reported_imports_m_usd / 1000).toFixed(1)}B\n${d.note}`
+    }),
+    Plot.ruleX([15], {stroke: "#666", strokeDasharray: "4,3", strokeWidth: 1}),
+    Plot.text([{x: 17, y: "Chile", text: "正常偏差阈值 →"}], {x: "x", y: "y", text: "text", fill: "#666", fontSize: 9, textAnchor: "start"}),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+结果令人震惊。**多数目的地国的数据与中国的出口数据基本吻合**——墨西哥（2.6%偏差）、智利（1.7%）、越南（9.1%）、沙特（9.1%）的镜像偏差均在正常范围内。但**中亚三国的偏差完全不正常**：
+
+#### 吉尔吉斯斯坦悖论
+
+中国海关报告2025年对吉尔吉斯斯坦出口总额超过**220亿美元**。问题是：**吉尔吉斯斯坦的全部GDP不到220亿美元。** 欧亚网（Eurasianet）、洛伊研究所（Lowy Institute）、大西洋理事会（Atlantic Council）等多家独立智库的调查一致指向同一个结论：这些"出口"实际上是**通过中亚走廊向俄罗斯转运**的货物。
+
+大西洋理事会的数据显示：2023年中国对吉尔吉斯斯坦的汽车零部件出口是2021年的**6.42倍**（超过4.15亿美元）。洛伊研究所发现，2023年前四个月中国向中亚运送的重卡数量是上年同期的**三倍**（超过4,700辆）。这些车辆的最终目的地不是中亚，而是俄罗斯。
+
+#### 哈萨克斯坦差距
+
+中国报告对哈出口279.5亿美元；哈萨克斯坦海关仅记录151.5亿美元进口——**128亿美元的缺口（46%）**。霍尔果斯口岸2024年处理了约42.1万辆汽车出口，其中相当部分经哈萨克斯坦转运。
+
+#### 这对商用车出口数据意味着什么？
+
+如果中国的106万辆商用车出口中有相当比例实际上是**经中亚转运至俄罗斯**，那么：
+
+1. **中亚本身的真实需求被严重高估。** 乌兹别克斯坦的16,162辆卡车中，有多少真正留在了乌兹别克斯坦？
+2. **俄罗斯的真实占比远高于官方的20%。** 计入经中亚转运的间接出口，俄罗斯在中国重卡出口中的实际占比在2023–2024年峰值时可能高达**25–30%**。
+3. **2025年俄罗斯需求的崩溃比表面数据显示的更严重。** 中国对俄直接卡车出口暴跌83–87%，同时中亚转运通道也在收紧（俄罗斯提高了回收费和进口关税至20–38%），意味着**中国商用车出口的实际增速可能被高估了3–5个百分点。**
+
+```js
+const riskConcentration = [
+  {region: "俄罗斯（直接）", share: 20, risk: "HIGH"},
+  {region: "中亚（疑似转运俄罗斯）", share: 8, risk: "EXTREME"},
+  {region: "墨西哥", share: 12, risk: "MODERATE"},
+  {region: "越南", share: 6.5, risk: "LOW"},
+  {region: "沙特", share: 5, risk: "LOW"},
+  {region: "智利", share: 3.9, risk: "LOW"},
+  {region: "乌兹别克斯坦", share: 2.9, risk: "MODERATE"},
+  {region: "非洲", share: 8, risk: "LOW"},
+  {region: "其他", share: 33.7, risk: "LOW"}
+];
+```
+
+```js
+Plot.plot({
+  width,
+  height: 340,
+  marginLeft: 160,
+  x: {label: "出口份额（%）", domain: [0, 40]},
+  color: {
+    legend: true,
+    domain: ["LOW", "MODERATE", "HIGH", "EXTREME"],
+    range: ["#22a553", "#f28e2c", "#e15759", "#8b0000"],
+    label: "风险等级"
+  },
+  marks: [
+    Plot.barX(riskConcentration, {
+      y: "region", x: "share", fill: "risk",
+      sort: {y: "-x"},
+      tip: true,
+      title: d => `${d.region}: ${d.share}%`
+    }),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+**综合评估：中国商用车出口中约28%的份额直接或间接流向俄罗斯**（20%直接 + ~8%经中亚转运）。这一高度集中的地缘政治风险敞口，加上2025年俄罗斯需求的雪崩式下滑，是商用车出口未来最大的不确定性因素。
+
+墨西哥的12%份额虽然本身风险较低，但面临50%关税（针对非FTA国家）的政策风险。其余约60%的出口分散在越南、沙特、智利、非洲等市场，镜像统计偏差小，数据可靠，风险可控。
 
 ---
 
